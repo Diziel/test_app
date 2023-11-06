@@ -1,0 +1,20 @@
+@import '../../../assets/styles/variables.scss';
+
+button[type='submit'] {
+  width: 100%;
+  padding: 14px;
+  border-radius: 4px;
+  gap: 10px;
+  margin-bottom: 0px;
+  background-color: $primary-blue;
+  border: 1px solid $primary-blue;
+  color: $white;
+  margin-top: 20px;
+  cursor: pointer;
+
+  &:disabled {
+    background-color: $gray-medium;
+    border: 1px solid $gray-dark;
+    cursor: default;
+  }
+}

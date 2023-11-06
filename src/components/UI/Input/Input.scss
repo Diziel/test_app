@@ -1,0 +1,21 @@
+@import '../../../assets/styles/variables.scss';
+
+input {
+  width: 100%;
+  border: 1px solid $gray-dark;
+  padding: 14px;
+  border-radius: 4px;
+  gap: 10px;
+  margin-bottom: 16px;
+
+  &:not(:placeholder-shown) {
+    color: $black;
+  }
+
+  &:placeholder-shown {
+    color: #868A8D;
+  }
+}
+.validation-error {
+color: $red-dark;
+}

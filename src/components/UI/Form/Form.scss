@@ -1,0 +1,14 @@
+@import '../../../assets/styles/variables.scss';
+
+.form-container {
+  width: 280px;
+  background-color: $white;
+  box-shadow: 0px 4px 4px 0px #00000026;
+  padding: 20px 16px;
+  border-radius: 4px;
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    padding: 10px;
+  }
+}

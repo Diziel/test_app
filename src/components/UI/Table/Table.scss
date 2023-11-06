@@ -1,0 +1,105 @@
+@import '../../../assets/styles/variables.scss';
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  
+  thead {
+    background-color: #0A508B;
+    color: $white;
+    
+    th {
+      font-weight: 400;
+      opacity: 0.5;
+      border-spacing: 0;
+      padding: 9px 12px;
+      text-align: left;
+
+      &:first-child {
+        border-top-left-radius: 4px;
+      }
+
+      &:last-child {
+        border-top-right-radius: 4px;
+      }
+    }
+  }
+
+  tbody {
+    background-color: $white;
+
+    tr {
+      border-bottom: 1px solid $gray-dark;
+
+      &:last-child {
+        td:first-child {
+          border-bottom-left-radius: 4px;
+        }
+        td:last-child {
+          border-bottom-right-radius: 4px;
+        }
+      }
+    }
+  }
+
+  td {
+    border-left: 1px solid $gray-dark;
+    border-right: 1px solid $gray-dark;
+    padding: 9px 12px;
+    color: #868A8D;
+
+    &:first-child {
+      border-left: 0px;
+    }
+
+    &:last-child {
+      border-right: 0px;
+      border-left: 0px;
+    }
+
+    .action {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+
+      button {
+        border: 0;
+        background: none;
+        text-decoration: underline;
+        cursor: pointer;
+
+        &.edit-button {
+          color: $blue-light;
+        }
+
+        &.delete-button {
+          color: $red-dark;
+        }
+      }
+    }
+  }
+}
+
+.table-container {
+  width: 596px;
+
+  .header {
+    display: flex;
+    justify-content: flex-end;
+
+    .delete-table-button {
+      color: $red-light;
+      border: 0;
+      background: 0;
+      padding: 0;
+      cursor: pointer;
+      font-size: 32px;
+    }
+  }
+}
+
+.clone-button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}

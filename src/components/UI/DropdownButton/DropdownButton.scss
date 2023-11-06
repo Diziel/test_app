@@ -1,0 +1,61 @@
+@import '../../../assets/styles/variables.scss';
+
+.dropdown-button {
+  width: 100%;
+  border: 1px solid $gray-dark;
+  padding: 14px;
+  border-radius: 4px;
+  gap: 10px;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: $white;
+  color: #868A8D;
+  cursor: pointer;
+
+  &::after {
+    content: '';
+    background: url('../../../assets/images/Vector.svg') no-repeat center;
+    width: 20px;
+    height: 20px;
+    display: block;
+    transition: all normal .3s ease;
+  }
+
+  &.true {
+    &::after {
+      transform: scaleY(-1);
+    }
+  }
+
+  &.selected {
+    color: $black;
+  }
+}
+
+.dropdown-list {
+  border: 1px solid $gray-dark;
+  box-shadow: 0px 2px 8px 0px #00000014;
+  border-radius: 4px;
+  padding: 0px 14px;
+  color: #868A8D;
+  position: fixed;
+  background: $white;
+  width: 248px;
+
+  .dropdown-item {
+    padding: 14px 0px;
+    border-bottom: 1px solid $gray-dark;
+
+    &:hover {
+      color: $black;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+}
