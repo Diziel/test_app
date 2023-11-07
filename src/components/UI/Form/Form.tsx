@@ -44,7 +44,7 @@ const Form: React.FC = () => {
   }, [formData])
   
   return (
-    <form className='form-container' onSubmit={handleSubmit}>
+    <form className='form' onSubmit={handleSubmit}>
       <Input type="text" name="name" value={formData.name} onChange={handleInputChange} placeholder="Name" required={true} />
       <Input type="text" name="surname" value={formData.surname} onChange={handleInputChange} placeholder="Surname" required={true} />
       <Input type="text" name="age" value={formData.age} onChange={handleInputChange} placeholder="Age" required={true} />

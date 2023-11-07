@@ -21,31 +21,31 @@ const Table: React.FC = () => {
   };
 
   return (
-    <div className='table-container'>
-      <div className='clone-button-container'>
+    <div className='container'>
+      <div className='container__header'>
         <CloneButton/>
       </div>
       <table className='table'>
-        <thead className='table-head'>
+        <thead className='table__header'>
           <tr>
-            <th>Name</th>
-            <th>Surname</th>
-            <th>Age</th>
-            <th>City</th>
-            <th></th>
+            <th className='table__header-th'>Name</th>
+            <th className='table__header-th'>Surname</th>
+            <th className='table__header-th'>Age</th>
+            <th className='table__header-th'>City</th>
+            <th className='table__header-th'></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className='table__body'>
           {tableData.map((row: RowData) => (
-            <tr key={row.id}>
-              <td>{row.name}</td>
-              <td>{row.surname}</td>
-              <td>{row.age}</td>
-              <td>{row.city}</td>
-              <td>
-                <div className='action'>
-                  <button className='edit-button' onClick={() => handleEdit(row)}>Edit</button>
-                  <button className='delete-button' onClick={() => handleDelete(row.id)}>Delete</button>
+            <tr className='table__body-tr' key={row.id}>
+              <td className='table__body-td'>{row.name}</td>
+              <td className='table__body-td'>{row.surname}</td>
+              <td className='table__body-td'>{row.age}</td>
+              <td className='table__body-td'>{row.city}</td>
+              <td className='table__body-td'>
+                <div className='table__body-td--action'>
+                  <button className='button button-edit' onClick={() => handleEdit(row)}>Edit</button>
+                  <button className='button button-delete' onClick={() => handleDelete(row.id)}>Delete</button>
                 </div>
               </td>
             </tr>

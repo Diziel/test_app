@@ -1,6 +1,6 @@
 @import '../../../assets/styles/variables.scss';
 
-input {
+.input {
   width: 100%;
   border: 1px solid $gray-dark;
   padding: 14px;
@@ -16,6 +16,7 @@ input {
     color: #868A8D;
   }
 }
+
 .validation-error {
 color: $red-dark;
 }

@@ -38,6 +38,7 @@ const Input: React.FC<InputProps> = ({ type, placeholder, name, onChange, requir
     <div>
       {error && <span className='validation-error'>{error}</span>}
       <input
+        className='input'
         type={type}
         placeholder={isFocused ? '' : placeholder}
         name={name}

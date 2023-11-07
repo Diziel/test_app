@@ -1,0 +1,18 @@
+@import '../../../assets/styles/variables.scss';
+
+.container {
+  
+  &__header{
+    display: flex;
+    justify-content: flex-end;
+  
+    .delete-table-button {
+      color: $red-light;
+      border: 0;
+      background: 0;
+      padding: 0;
+      cursor: pointer;
+      font-size: 32px;
+    }
+  }
+} 

@@ -33,49 +33,45 @@ const FormModal: React.FC<ModalProps> = ({ isOpen, onClose, data, chosenData }) 
 
   return (
     <Draggable cancel=".modal-content" nodeRef={nodeRef}>
-      <div ref={nodeRef} className="modal form-container">
-        <div className="modal-header">
-          <span className="close-button" onClick={onClose}>
+      <div ref={nodeRef} className="modal">
+        <div className="modal__header">
+          <span className="modal__header-close" onClick={onClose}>
             &times;
           </span>
         </div>
-        <div className="modal-content">
-          <div>
-            <form onSubmit={handleSubmit}>
-              <Input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
-                placeholder="Name"
-                required={true}
-              />
-              <Input
-                type="text"
-                name="surname"
-                value={formData.surname}
-                onChange={handleInputChange}
-                placeholder="Surname"
-                required={true}
-              />
-              <Input
-                type="text"
-                name="age"
-                value={formData.age}
-                onChange={handleInputChange}
-                placeholder="Age"
-                required={true}
-              />
-              <DropdownButton
-                options={['Riga', 'Daugavpils', 'Jūrmala', 'Ventspils']}
-                onSelect={handleDropdownChange}
-                placeholder="City"
-                selectedValue={formData.city || selectedDropdownValue}
-              />
-              <button type="submit">Save</button>
-            </form>
-          </div>
-        </div>
+        <form onSubmit={handleSubmit}>
+          <Input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleInputChange}
+            placeholder="Name"
+            required={true}
+          />
+          <Input
+            type="text"
+            name="surname"
+            value={formData.surname}
+            onChange={handleInputChange}
+            placeholder="Surname"
+            required={true}
+          />
+          <Input
+            type="text"
+            name="age"
+            value={formData.age}
+            onChange={handleInputChange}
+            placeholder="Age"
+            required={true}
+          />
+          <DropdownButton
+            options={['Riga', 'Daugavpils', 'Jūrmala', 'Ventspils']}
+            onSelect={handleDropdownChange}
+            placeholder="City"
+            selectedValue={formData.city || selectedDropdownValue}
+          />
+          <button className='modal__button' type="submit">Save</button>
+        </form>
       </div>
     </Draggable>
   );
