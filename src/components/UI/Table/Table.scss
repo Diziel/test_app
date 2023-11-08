@@ -1,5 +1,4 @@
-@import '../../../assets/styles/variables.scss';
-
+@import "../../../assets/styles/variables.scss";
 
 .container {
   width: 596px;
@@ -13,34 +12,34 @@
   .table {
     border-collapse: collapse;
     width: 100%;
-    
+
     &__header {
-      background-color: #0A508B;
+      background-color: #0a508b;
       color: $white;
-      
-      &-th {
+
+      &-cell {
         font-weight: 400;
         opacity: 0.5;
         border-spacing: 0;
         padding: 9px 12px;
         text-align: left;
-  
+
         &:first-child {
           border-top-left-radius: 4px;
         }
-  
+
         &:last-child {
           border-top-right-radius: 4px;
         }
       }
     }
-  
+
     &__body {
       background-color: $white;
-  
-      &-tr {
+
+      &-row {
         border-bottom: 1px solid $gray-dark;
-  
+
         &:last-child {
           td:first-child {
             border-bottom-left-radius: 4px;
@@ -49,38 +48,38 @@
             border-bottom-right-radius: 4px;
           }
         }
-
       }
-      &-td {
+
+      &-cell {
         border-left: 1px solid $gray-dark;
         border-right: 1px solid $gray-dark;
         padding: 9px 12px;
-        color: #868A8D;
-    
+        color: $grey-300;
+
         &:first-child {
           border-left: 0px;
         }
-    
+
         &:last-child {
           border-right: 0px;
           border-left: 0px;
         }
-    
+
         &--action {
           display: flex;
           align-items: center;
           justify-content: space-around;
-    
+
           .button {
             border: 0;
             background: none;
             text-decoration: underline;
             cursor: pointer;
-    
+
             &.button-edit {
               color: $blue-light;
             }
-    
+
             &.button-delete {
               color: $red-dark;
             }
@@ -88,6 +87,76 @@
         }
       }
     }
-  
+  }
+}
+
+// Media query for mobile devices
+@media only screen and (max-width: 600px) {
+  .container {
+    width: auto;
+    overflow-x: auto;
+
+    .table {
+      display: block; /* Change to block layout */
+
+      &__header {
+        display: block;
+        width: 100%;
+        border-top-right-radius: 4px;
+        border-top-left-radius: 4px;
+
+        &-row {
+          display: flex;
+          flex-wrap: nowrap;
+        }
+        &-cell {
+          width: 28%;
+
+          &:nth-child(3) {
+            width: 16%;
+          }
+
+          &:last-child {
+            display: none;
+          }
+        }
+      }
+
+      &__body {
+        display: flex;
+        flex-direction: column; /* Change to column layout for the body */
+        border-bottom-right-radius: 4px;
+        border-bottom-left-radius: 4px;
+
+        &-row {
+          display: flex;
+          border-bottom: 1px solid $gray-dark;
+          flex-direction: row;
+          flex-wrap: wrap;
+        }
+
+        &-cell {
+          padding: 9px 12px;
+          color: $grey-300;
+          width: 28%;
+          border-right: 0px;
+
+          &:nth-child(3) {
+            width: 16%;
+          }
+
+          &:last-child {
+            width: 100%;
+            border-top: 1px solid $gray-dark;
+          }
+          &--action {
+            display: flex;
+            flex-direction: row; /* Aligning actions in a row */
+            justify-content: space-evenly; /* Spacing out the actions */
+            align-items: center; /* Aligning items at the center */
+          }
+        }
+      }
+    }
   }
 }

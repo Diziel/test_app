@@ -1,4 +1,4 @@
-@import '../../../assets/styles/variables.scss';
+@import "../../../assets/styles/variables.scss";
 
 .dropdown {
   &__button {
@@ -12,48 +12,53 @@
     align-items: center;
     justify-content: space-between;
     background-color: $white;
-    color: #868A8D;
+    color: $grey-300;
     cursor: pointer;
-    
+
     &::after {
-      content: '';
-      background: url('../../../assets/images/Vector.svg') no-repeat center;
+      content: "";
+      background: url("../../../assets/images/Vector.svg") no-repeat center;
       width: 20px;
       height: 20px;
       display: block;
-      transition: all normal .3s ease;
+      transition: all normal 0.3s ease;
     }
-    &.true {
+    &.open {
       &::after {
         transform: scaleY(-1);
       }
     }
-    
+
     &.selected {
       color: $black;
     }
   }
-  
+
   &__list {
     border: 1px solid $gray-dark;
     box-shadow: 0px 2px 8px 0px #00000014;
     border-radius: 4px;
     padding: 0px 14px;
-    color: #868A8D;
-    position: fixed;
+    color: $grey-300;
+    position: absolute;
+    z-index: 10;
     background: $white;
     width: 248px;
-  
+
+    @media screen and (max-width: 600px) {
+      width: calc(100% - 50px);
+    }
+
     &-item {
       padding: 14px 0px;
       border-bottom: 1px solid $gray-dark;
-  
+
       &:hover {
         color: $black;
         cursor: pointer;
         font-weight: 700;
       }
-  
+
       &:last-child {
         border-bottom: 0;
       }

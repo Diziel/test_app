@@ -1,4 +1,4 @@
-@import '../../../assets/styles/variables.scss';
+@import "../../../assets/styles/variables.scss";
 
 .input {
   width: 100%;
@@ -13,10 +13,10 @@
   }
 
   &:placeholder-shown {
-    color: #868A8D;
+    color: $grey-300;
   }
 }
 
 .validation-error {
-color: $red-dark;
+  color: $red-dark;
 }

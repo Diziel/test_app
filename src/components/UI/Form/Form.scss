@@ -1,4 +1,4 @@
-@import '../../../assets/styles/variables.scss';
+@import "../../../assets/styles/variables.scss";
 
 .form {
   width: 280px;
@@ -7,8 +7,9 @@
   padding: 20px 16px;
   border-radius: 4px;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 600px) {
     width: 100%;
     padding: 10px;
+    margin-bottom: 20px;
   }
 }

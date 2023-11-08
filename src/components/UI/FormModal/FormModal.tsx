@@ -1,18 +1,24 @@
-import React, { useState, useRef } from 'react';
-import { useDispatch } from 'react-redux';
-import { editRow } from '../../../store/tableSlice';
-import DropdownButton from '../DropdownButton/DropdownButton';
-import Input from '../Input/Input';
-import Draggable from 'react-draggable';
-import './FormModal.scss';
-import { RowData } from '../../../types/RowData';
-import { ModalProps } from '../../../types/Modal';
+import React, { useState, useRef } from "react";
+import { useDispatch } from "react-redux";
+import { editRow } from "../../../store/tableSlice";
+import Dropdown from "../Dropdown/Dropdown";
+import Input from "../Input/Input";
+import Draggable from "react-draggable";
+import "./FormModal.scss";
+import { RowData } from "../../../types/RowData";
+import { ModalProps } from "../../../types/Modal";
 
-const FormModal: React.FC<ModalProps> = ({ isOpen, onClose, data, chosenData }) => {
+const FormModal: React.FC<ModalProps> = ({
+  isOpen,
+  onClose,
+  data,
+  chosenData,
+}) => {
   const nodeRef = useRef(null);
   const dispatch = useDispatch();
   const [formData, setFormData] = useState<RowData>(data);
-  const [selectedDropdownValue, setSelectedDropdownValue] = useState<string>('');
+  const [selectedDropdownValue, setSelectedDropdownValue] =
+    useState<string>("");
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -28,7 +34,7 @@ const FormModal: React.FC<ModalProps> = ({ isOpen, onClose, data, chosenData }) 
     setSelectedDropdownValue(selectedValue);
     setFormData({ ...formData, city: selectedValue });
   };
-  
+
   if (!isOpen) return null;
 
   return (
@@ -64,13 +70,15 @@ const FormModal: React.FC<ModalProps> = ({ isOpen, onClose, data, chosenData }) 
             placeholder="Age"
             required={true}
           />
-          <DropdownButton
-            options={['Riga', 'Daugavpils', 'Jūrmala', 'Ventspils']}
+          <Dropdown
+            options={["Riga", "Daugavpils", "Jūrmala", "Ventspils"]}
             onSelect={handleDropdownChange}
             placeholder="City"
             selectedValue={formData.city || selectedDropdownValue}
           />
-          <button className='modal__button' type="submit">Save</button>
+          <button className="modal__button" type="submit">
+            Save
+          </button>
         </form>
       </div>
     </Draggable>

@@ -16,3 +16,22 @@ body {
 *:before {
   box-sizing: border-box;
 }
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 0.3125rem $grey-100;
+  border-radius: 0.625rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $grey-200;
+  border-radius: 0.625rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $grey-deep;
+}
