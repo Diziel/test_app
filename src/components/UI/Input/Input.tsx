@@ -9,6 +9,7 @@ const Input: React.FC<InputProps> = ({
   onChange,
   required,
   value,
+  onErrorChange,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [error, setError] = useState<string>("");
@@ -19,26 +20,23 @@ const Input: React.FC<InputProps> = ({
 
   const handleBlur = () => {
     setIsFocused(false);
+    let inputError = "";
+
     if (required && !value) {
-      setError(`${name} is required`);
-    } else {
-      setError("");
+      inputError = `${name} is required`;
+    } else if (name === "name" && !/^\S+$/.test(value.toString())) {
+      inputError = "Name should not contain any spaces";
+    } else if (name === "surname" && !/^\S+$/.test(value.toString())) {
+      inputError = "Surname should not contain any spaces";
+    } else if (
+      name === "age" &&
+      (isNaN(Number(value)) || Number(value) < 1 || Number(value) > 150)
+    ) {
+      inputError = "Age should be a number between 1 and 150";
     }
 
-    // Name validation (no spaces allowed)
-    if (name === "name" && !/^\S+$/.test(value.toString())) {
-      setError("Name should not contain any spaces");
-    }
-
-    // Surname validation (no spaces allowed)
-    if (name === "surname" && !/^\S+$/.test(value.toString())) {
-      setError("Surname should not contain any spaces");
-    }
-
-    // Age validation (only numbers from 1 to 150 allowed)
-    if (name === "age" && (isNaN(Number(value)) || value < 1 || value > 150)) {
-      setError("Age should be a number between 1 and 150");
-    }
+    setError(inputError);
+    onErrorChange(!inputError);
   };
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteRow,
@@ -16,18 +16,21 @@ interface CloneTableProps {
   tableData: RowData[] | null;
 }
 
-const CloneTable: React.FC<CloneTableProps> = ({ tableData }) => {
+const CloneTable: React.FC<CloneTableProps> = React.memo(({ tableData }) => {
   const dispatch = useDispatch();
   const clonedTableData = useSelector(selectClonedTableData);
   const [editModalData, setEditModalData] = useState<RowData | null>(null);
 
-  const handleDelete = (id: number) => {
+  const handleDelete = useCallback((id: number) => {
     dispatch(deleteRow({ id, chosenData: "clonedData" }));
-  };
+  }, [dispatch]);
 
-  const handleEdit = (rowData: RowData) => {
+  const handleEdit = useCallback((rowData: RowData) => {
     setEditModalData(rowData);
-  };
+  }, []);
+
+  const memoizedClonedTableData = useMemo(() => clonedTableData, [clonedTableData]);
+  const memoizedTableData = useMemo(() => tableData, [tableData]);
 
   const handleDeleteTable = () => {
     dispatch(setIsCloneVisible(false));
@@ -36,7 +39,7 @@ const CloneTable: React.FC<CloneTableProps> = ({ tableData }) => {
     }, 500);
   };
 
-  return tableData && tableData.length ? (
+  return memoizedTableData && memoizedTableData.length ? (
     <div className="container">
       <div className="container__header">
         <Button
@@ -58,7 +61,7 @@ const CloneTable: React.FC<CloneTableProps> = ({ tableData }) => {
           </tr>
         </thead>
         <tbody className="table__body">
-          {clonedTableData.map((row: RowData) => (
+          {memoizedClonedTableData.map((row: RowData) => (
             <tr className="table__body-row" key={row.id}>
               <td className="table__body-cell">{row.name}</td>
               <td className="table__body-cell">{row.surname}</td>
@@ -66,16 +69,10 @@ const CloneTable: React.FC<CloneTableProps> = ({ tableData }) => {
               <td className="table__body-cell">{row.city}</td>
               <td className="table__body-cell">
                 <div className="table__body-cell--action">
-                  <button
-                    className="button button-edit"
-                    onClick={() => handleEdit(row)}
-                  >
+                  <button className="button button-edit" onClick={() => handleEdit(row)}>
                     Edit
                   </button>
-                  <button
-                    className="button button-delete"
-                    onClick={() => handleDelete(row.id)}
-                  >
+                  <button className="button button-delete" onClick={() => handleDelete(row.id)}>
                     Delete
                   </button>
                 </div>
@@ -94,6 +91,6 @@ const CloneTable: React.FC<CloneTableProps> = ({ tableData }) => {
       )}
     </div>
   ) : null;
-};
+});
 
 export default CloneTable;

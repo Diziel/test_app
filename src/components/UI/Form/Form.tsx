@@ -18,6 +18,7 @@ const Form: React.FC = () => {
   const [selectedDropdownValue, setSelectedDropdownValue] =
     useState<string>("");
   const [isDisable, setDisable] = useState<boolean>(true);
+  const [inputError, setInputError] = useState<boolean>(false);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value } as FormData);
@@ -45,6 +46,10 @@ const Form: React.FC = () => {
     setDisable(false);
   };
 
+  const handleErrorChange = (error: boolean) => {
+    setInputError(!error);
+  };
+
   useEffect(() => {
     isDisabledBtn(formData);
   }, [formData]);
@@ -58,6 +63,7 @@ const Form: React.FC = () => {
         onChange={handleInputChange}
         placeholder="Name"
         required={true}
+        onErrorChange={handleErrorChange}
       />
       <Input
         type="text"
@@ -66,6 +72,7 @@ const Form: React.FC = () => {
         onChange={handleInputChange}
         placeholder="Surname"
         required={true}
+        onErrorChange={handleErrorChange}
       />
       <Input
         type="text"
@@ -74,6 +81,7 @@ const Form: React.FC = () => {
         onChange={handleInputChange}
         placeholder="Age"
         required={true}
+        onErrorChange={handleErrorChange}
       />
       <Dropdown
         options={["Riga", "Daugavpils", "Jūrmala", "Ventspils"]}
@@ -81,7 +89,11 @@ const Form: React.FC = () => {
         placeholder="City"
         selectedValue={selectedDropdownValue}
       />
-      <Button type="submit" label="ADD" disabled={isDisable} />
+      <Button 
+        type="submit" 
+        label="ADD" 
+        disabled={isDisable || inputError}
+      />
     </form>
   );
 };

@@ -22,7 +22,7 @@ export const tableSlice = createSlice({
     ) => {
       const { chosenData } = action.payload;
       state[chosenData] = state[chosenData].filter(
-        (row) => row.id !== action.payload.id
+        (row: { id: number; }) => row.id !== action.payload.id
       );
     },
     editRow: (

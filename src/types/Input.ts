@@ -7,4 +7,5 @@ export interface InputProps {
   required: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value: string | number;
+  onErrorChange: (error: boolean) => void;
 }

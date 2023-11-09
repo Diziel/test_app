@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { editRow } from "../../../store/tableSlice";
 import Dropdown from "../Dropdown/Dropdown";
@@ -7,6 +7,8 @@ import Draggable from "react-draggable";
 import "./FormModal.scss";
 import { RowData } from "../../../types/RowData";
 import { ModalProps } from "../../../types/Modal";
+import { FormData } from "../../../types/FormData";
+import Button from "../Button/Button";
 
 const FormModal: React.FC<ModalProps> = ({
   isOpen,
@@ -19,6 +21,8 @@ const FormModal: React.FC<ModalProps> = ({
   const [formData, setFormData] = useState<RowData>(data);
   const [selectedDropdownValue, setSelectedDropdownValue] =
     useState<string>("");
+  const [isDisable, setDisable] = useState<boolean>(true);
+  const [inputError, setInputError] = useState<boolean>(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -35,17 +39,39 @@ const FormModal: React.FC<ModalProps> = ({
     setFormData({ ...formData, city: selectedValue });
   };
 
+  const isDisabledBtn = (data: FormData) => {
+    for (const key in data) {
+      if (!data[key as keyof FormData] || data[key as keyof FormData] === "") {
+        setDisable(true);
+        return;
+      }
+    }
+    setDisable(false);
+  };
+
+  const handleErrorChange = (error: boolean) => {
+    setInputError(!error);
+  };
+
+  useEffect(() => {
+    isDisabledBtn(formData);
+  }, [formData]);
+
   if (!isOpen) return null;
 
   return (
-    <Draggable cancel=".modal-content" nodeRef={nodeRef}>
+    <Draggable
+      cancel=".form-modal, .modal__header-close"
+      defaultPosition={{ x: 30, y: -400 }}
+      nodeRef={nodeRef}
+    >
       <div ref={nodeRef} className="modal">
         <div className="modal__header">
           <span className="modal__header-close" onClick={onClose}>
             &times;
           </span>
         </div>
-        <form onSubmit={handleSubmit}>
+        <form className="form-modal" onSubmit={handleSubmit}>
           <Input
             type="text"
             name="name"
@@ -53,6 +79,7 @@ const FormModal: React.FC<ModalProps> = ({
             onChange={handleInputChange}
             placeholder="Name"
             required={true}
+            onErrorChange={handleErrorChange}
           />
           <Input
             type="text"
@@ -61,6 +88,7 @@ const FormModal: React.FC<ModalProps> = ({
             onChange={handleInputChange}
             placeholder="Surname"
             required={true}
+            onErrorChange={handleErrorChange}
           />
           <Input
             type="text"
@@ -69,6 +97,7 @@ const FormModal: React.FC<ModalProps> = ({
             onChange={handleInputChange}
             placeholder="Age"
             required={true}
+            onErrorChange={handleErrorChange}
           />
           <Dropdown
             options={["Riga", "Daugavpils", "Jūrmala", "Ventspils"]}
@@ -76,9 +105,12 @@ const FormModal: React.FC<ModalProps> = ({
             placeholder="City"
             selectedValue={formData.city || selectedDropdownValue}
           />
-          <button className="modal__button" type="submit">
-            Save
-          </button>
+          <Button 
+            className="modal__button"
+            type="submit"
+            label="Save"
+            disabled={isDisable || inputError}
+          />
         </form>
       </div>
     </Draggable>
